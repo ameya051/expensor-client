@@ -2,27 +2,24 @@
 
 ### A Webapp to track your daily & monthly expenses with bar chart.
 
-### Live website: https://thunderbird.onrender.com/
+### Live website: https://expensor-client.vercel.app/
 
-### Backend Code: https://github.com/ameya051/thunderbird-backend
+### Backend Code: https://github.com/ameya051/expensor-server
 
 ## Features
 
 * Register/Login
-* Search for users
-* One-on-one chat
-* Group Chats
-* Adding, removing users from group chat
-* Renaming group chat
-* Typing indicator
+* Create, Remove, Edit Expense Categories
+* Add, Remove, Edit daily transactions
+* Full responsive bar chart displaying monthly expenses
+
 
 ## Tech Stack
 
-* Reactjs, Chakra UI: For creating the frontend
-* Axios: For API calls
+* Reactjs, MUI, Redux Toolkit: For creating the frontend
+* Fetch API: For API calls
 * Nodejs, Expressjs: For handling backend requests
 * Mongodb: For database
 * mongoose: To interact with Mongodb database
-* socket.io : for handling the websockets requests on server
-* jsonwebtokens: for signing and validating jwts
+* Passport.js: for authorization
 * bcrypt : for hashing password
