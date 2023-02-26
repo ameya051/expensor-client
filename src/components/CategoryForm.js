@@ -32,10 +32,6 @@ export default function CategoryForm({ editCategory }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleDate(newValue) {
-    setForm({ ...form, date: newValue });
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
     editCategory._id === undefined ? create() : update();
