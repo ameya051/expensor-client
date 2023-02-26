@@ -1,8 +1,9 @@
-import Autocomplete from "@mui/material/Autocomplete";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { alignProperty } from "@mui/material/styles/cssUtils.js";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Cookies from "js-cookie";
@@ -14,7 +15,6 @@ const InitialForm = {
   label: "",
   icon: "",
 };
-const icons = ["User"];
 
 export default function CategoryForm({ editCategory }) {
   const user = useSelector((state) => state.auth.user);
@@ -29,6 +29,7 @@ export default function CategoryForm({ editCategory }) {
   }, [editCategory]);
 
   function handleChange(e) {
+    console.log(user);
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
@@ -39,7 +40,7 @@ export default function CategoryForm({ editCategory }) {
 
   function reload(res, _user) {
     if (res.ok) {
-      dispatch(setUser({ user: _user }));
+      dispatch(setUser(_user));
       setForm(InitialForm);
     }
   }
@@ -53,6 +54,7 @@ export default function CategoryForm({ editCategory }) {
         Authorization: `Bearer ${token}`,
       },
     });
+
     const _user = {
       ...user,
       categories: [...user.categories, { ...form }],
@@ -72,7 +74,7 @@ export default function CategoryForm({ editCategory }) {
         },
       }
     );
-    
+
     const _user = {
       ...user,
       categories: user.categories.map((cat) =>
@@ -82,18 +84,11 @@ export default function CategoryForm({ editCategory }) {
     reload(res, _user);
   }
 
-  function getCategoryNameById() {
-    return (
-      user.categories.find((category) => category._id === form.category_id) ??
-      ""
-    );
-  }
-
   return (
     <Card sx={{ minWidth: 275, marginTop: 10 }}>
       <CardContent>
         <Typography variant="h6">Add New Categeory</Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex" }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", justifyContent:"center" }}>
           <TextField
             sx={{ marginRight: 5 }}
             id="outlined-basic"
@@ -106,7 +101,7 @@ export default function CategoryForm({ editCategory }) {
             onChange={handleChange}
           />
 
-          <Autocomplete
+          {/* <Autocomplete
             value={getCategoryNameById()}
             onChange={(event, newValue) => {
               setForm({ ...form, icon: newValue });
@@ -117,17 +112,15 @@ export default function CategoryForm({ editCategory }) {
             renderInput={(params) => (
               <TextField {...params} size="small" label="Icon" />
             )}
-          />
+          /> */}
 
-          {editCategory._id !== undefined && (
-            <Button type="submit" variant="secondary">
-              Update
-            </Button>
-          )}
-
-          {editCategory._id === undefined && (
+          {editCategory._id === undefined ? (
             <Button type="submit" variant="contained">
               Submit
+            </Button>
+          ) : (
+            <Button type="submit" variant="secondary">
+              Update
             </Button>
           )}
         </Box>

@@ -1,3 +1,4 @@
+import { CssBaseline } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -21,8 +22,9 @@ export default function Appbar() {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1, marginBottom: 16 }}>
+      <CssBaseline />
+      <AppBar>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link className="text-white" to="/">
@@ -30,17 +32,16 @@ export default function Appbar() {
             </Link>
           </Typography>
 
-          <Link to="/category" className="text-white">
-            <Button color="inherit">Category</Button>
-          </Link>
-
-          {isAuthenticated && (
-            <Button color="inherit" onClick={_logout}>
-              Logout
-            </Button>
-          )}
-
-          {!isAuthenticated && (
+          {isAuthenticated ? (
+            <>
+              <Link to="/category" className="text-white">
+                <Button color="inherit">Category</Button>
+              </Link>
+              <Button color="inherit" onClick={_logout}>
+                Logout
+              </Button>
+            </>
+          ) : (
             <>
               <Link to="/login" className="text-white">
                 <Button color="inherit">Login</Button>

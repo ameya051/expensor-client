@@ -1,8 +1,6 @@
-import Autocomplete from "@mui/material/Autocomplete";
+import { Autocomplete, Grid, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -89,55 +87,46 @@ export default function TransactionForm({
   }
 
   return (
-    <Card sx={{ minWidth: 275, marginTop: 10 }}>
-      <CardContent>
-        <Typography variant="h6">Add New Transaction</Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex" }}>
+    <Box
+      component="form"
+      noValidate
+      onSubmit={handleSubmit}
+      sx={{ marginLeft: 2, marginTop: 6 }}
+    >
+      <Grid
+        container
+        spacing={2}
+        component={Paper}
+        sx={{ paddingBottom: 2, paddingRight: 2 }}
+      >
+        <Grid item xs={12}>
+          <Typography variant="h6">Add New Transaction</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Amount"
+            type="number"
+            name="amount"
+            variant="outlined"
+            value={form.amount}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <Autocomplete
+            fullWidth
             value={form.type}
             onChange={(event, newValue) => {
               setForm({ ...form, type: newValue });
             }}
             id="type"
             options={types}
-            sx={{ width: 200, marginRight: 5 }}
-            renderInput={(params) => (
-              <TextField {...params} size="small" label="Type" />
-            )}
+            renderInput={(params) => <TextField {...params} label="Type" />}
           />
-          <TextField
-            sx={{ marginRight: 5 }}
-            id="outlined-basic"
-            label="Amount"
-            type="number"
-            size="small"
-            name="amount"
-            variant="outlined"
-            value={form.amount}
-            onChange={handleChange}
-          />
-          <TextField
-            sx={{ marginRight: 5 }}
-            id="outlined-basic"
-            label="Description"
-            size="small"
-            name="description"
-            variant="outlined"
-            value={form.description}
-            onChange={handleChange}
-          />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              label="Transaction Date"
-              inputFormat="MM/DD/YYYY"
-              value={form.date}
-              onChange={handleDate}
-              renderInput={(params) => (
-                <TextField sx={{ marginRight: 5 }} size="small" {...params} />
-              )}
-            />
-          </LocalizationProvider>
-
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <Autocomplete
             value={getCategoryNameById()}
             onChange={(event, newValue) => {
@@ -145,12 +134,34 @@ export default function TransactionForm({
             }}
             id="controllable-states-demo"
             options={categories}
-            sx={{ width: 200, marginRight: 5 }}
-            renderInput={(params) => (
-              <TextField {...params} size="small" label="Category" />
-            )}
+            renderInput={(params) => <TextField {...params} label="Category" />}
           />
-
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+              label="Transaction Date"
+              inputFormat="MM/DD/YYYY"
+              value={form.date}
+              onChange={handleDate}
+              renderInput={(params) => (
+                <TextField sx={{ marginRight: 5 }} fullWidth {...params} />
+              )}
+            />
+          </LocalizationProvider>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Description"
+            name="description"
+            variant="outlined"
+            value={form.description}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
           {editTransaction.amount !== undefined && (
             <Button type="submit" variant="secondary">
               Update
@@ -162,8 +173,8 @@ export default function TransactionForm({
               Submit
             </Button>
           )}
-        </Box>
-      </CardContent>
-    </Card>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

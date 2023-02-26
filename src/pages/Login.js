@@ -87,7 +87,7 @@ export default function Login() {
           >
             Sign In
           </Button>
-          <Grid container>
+          <Grid container justifyContent="flex-end">
             <Grid item>
               <RouterLink to="/register">
                 <Link component="span" variant="body2">

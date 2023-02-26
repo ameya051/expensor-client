@@ -54,7 +54,6 @@ export default function Category() {
           <TableHead>
             <TableRow>
               <TableCell align="center">Label</TableCell>
-              <TableCell align="center">Icon</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -67,7 +66,6 @@ export default function Category() {
                 <TableCell align="center" component="th" scope="row">
                   {row.label}
                 </TableCell>
-                <TableCell align="center">{row.icon}</TableCell>
                 <TableCell align="center">
                   <IconButton
                     color="primary"
